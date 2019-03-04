@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+buildscript {
+    ext {
+    	springBootVersion = property('springboot.version')
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+group 'it.francescofiora'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+def logbackVersion = property('logback.version')
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-batch')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile("ch.qos.logback:logback-classic:$logbackVersion")
+
+    compile("org.hsqldb:hsqldb")
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.batch:spring-batch-test')
+}
