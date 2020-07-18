@@ -13,20 +13,21 @@ import it.francescofiora.model.Message;
 
 /**
  * LogFile ItemReader.
+ * 
  * @author francesco
  *
  */
 public class LogFileItemReader extends FlatFileItemReader<Message> {
 
-    private Logger log = LoggerFactory.getLogger(this.getClass());
-	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+
 	public void init(final String file) {
 		setResource(new FileSystemResource(file));
 
 		setLineMapper(new LineMapper<Message>() {
 
 			private ObjectMapper mapper = new ObjectMapper();
-			
+
 			@Override
 			public Message mapLine(String line, int lineNumber) throws Exception {
 				try {

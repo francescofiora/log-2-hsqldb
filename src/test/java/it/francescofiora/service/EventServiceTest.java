@@ -54,8 +54,8 @@ public class EventServiceTest {
 	static class TestContextConfiguration {
 
 		@Bean
-		public EventService service() {
-			return new EventServiceImpl();
+		public EventService service(EventRepository repository) {
+			return new EventServiceImpl(repository);
 		}
 	}
 }

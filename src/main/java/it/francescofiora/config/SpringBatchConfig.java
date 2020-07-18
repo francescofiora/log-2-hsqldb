@@ -11,7 +11,6 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,55 +23,54 @@ import it.francescofiora.writer.LogFileItemWriter;
 
 /**
  * SpringBatch Config.
+ * 
  * @author francesco
  */
 @Configuration
 @EnableBatchProcessing
 @PropertySource("classpath:/batch.properties")
 public class SpringBatchConfig {
-    private Logger log = LoggerFactory.getLogger(this.getClass());
-    
-    @Value("${job.chunk:100}") 
-    private Integer chunk;
-    
-    @Autowired
-    public JobBuilderFactory jobBuilderFactory;
- 
-    @Autowired
-    public StepBuilderFactory stepBuilderFactory;
- 
-    @Autowired
-    public EventService service;
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Bean
-    public Job read() {
-        return jobBuilderFactory.get("read")
-                .incrementer(new RunIdIncrementer())
-                .start(step1()).build();
-    }
+	@Value("${job.chunk:100}")
+	private Integer chunk;
 
-    @Bean
-    public TaskletStep step1() {
-    	log.debug("Chunk: " + chunk);
-        return stepBuilderFactory.get("step1")
-        		.<Message, Message>chunk(chunk)
-                .reader(reader(null))
-                .writer(writer())
-                .build();
-    }
+	public final JobBuilderFactory jobBuilderFactory;
+
+	public final StepBuilderFactory stepBuilderFactory;
+
+	public final EventService service;
+
+	public SpringBatchConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
+			EventService service) {
+		this.jobBuilderFactory = jobBuilderFactory;
+		this.stepBuilderFactory = stepBuilderFactory;
+		this.service = service;
+	}
 
 	@Bean
-    public ItemWriter<Message> writer() {
+	public Job read() {
+		return jobBuilderFactory.get("read").incrementer(new RunIdIncrementer()).start(step1()).build();
+	}
+
+	@Bean
+	public TaskletStep step1() {
+		log.debug("Chunk: " + chunk);
+		return stepBuilderFactory.get("step1").<Message, Message>chunk(chunk).reader(reader(null)).writer(writer()).build();
+	}
+
+	@Bean
+	public ItemWriter<Message> writer() {
 		return new LogFileItemWriter(service);
-    }
+	}
 
 	@Bean
-    @StepScope
-    public FlatFileItemReader<Message> reader(@Value("#{jobParameters['file']}") String file) {
+	@StepScope
+	public FlatFileItemReader<Message> reader(@Value("#{jobParameters['file']}") String file) {
 		log.debug("Load log file: " + file);
 		LogFileItemReader reader = new LogFileItemReader();
 		reader.init(file);
 		return reader;
 	}
-    
+
 }

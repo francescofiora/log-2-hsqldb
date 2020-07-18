@@ -32,14 +32,14 @@ The application create a new table if necessary and enter the following values:
 * "alert" true is applicable
 
 ## Technologies used
+- [Gradle 6.3](https://gradle.org/)
 - [Java 8](http://www.oracle.com/technetwork/java/javaee/overview/index.html)
-- [Spring Boot 2.0](https://spring.io/projects/spring-boot)
-- [Spring Batch 4.0](https://spring.io/projects/spring-batch)
-- [Spring Data JPA 2.0](https://projects.spring.io/spring-data-jpa)
-* [Gradle 4.8](https://gradle.org/)
-* [HsqlDb 2.4](http://hsqldb.org/)
-* [LogBack 1.2](https://logback.qos.ch/)
-* [Mockito 2.15](https://site.mockito.org/)
+- [Spring Boot 2.3](https://spring.io/projects/spring-boot)
+- [Spring Batch](https://spring.io/projects/spring-batch)
+- [Spring Data JPA](https://projects.spring.io/spring-data-jpa)
+- [HsqlDb](http://hsqldb.org/)
+- [LogBack 1.2](https://logback.qos.ch/)
+- [Mockito](https://site.mockito.org/)
 
 ## How to build
 ./gradlew clean build
@@ -47,6 +47,3 @@ The application create a new table if necessary and enter the following values:
 ## How to execute
 java -jar build/libs/log-2-hsqldb-1.0-SNAPSHOT.jar file=<path/file_name.log>
 
-## Author
-
-* **Francesco Fiorà**

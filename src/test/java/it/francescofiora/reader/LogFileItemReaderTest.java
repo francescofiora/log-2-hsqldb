@@ -10,9 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import it.francescofiora.model.Message;
 
-
 /**
  * Test LogFileItemReader.
+ * 
  * @author francesco
  *
  */
@@ -23,23 +23,21 @@ public class LogFileItemReaderTest {
 
 	@Test
 	public void testReader() throws Exception {
-		int count = StepScopeTestUtils.doInStepScope(
-				MetaDataInstanceFactory.createStepExecution(), () -> callable());
+		int count = StepScopeTestUtils.doInStepScope(MetaDataInstanceFactory.createStepExecution(), () -> callable());
 		Assert.assertEquals(6, count);
 	}
 
 	private int callable() throws Exception {
-		String file = getClass().getClassLoader()
-				.getResource("it/francescofiora/reader/events.log").getFile();
+		String file = getClass().getClassLoader().getResource("it/francescofiora/reader/events.log").getFile();
 		itemReader.init(file);
 		itemReader.open(MetaDataInstanceFactory.createStepExecution().getExecutionContext());
 		Message msg = null;
 		int count = 0;
 		try {
 			while ((msg = itemReader.read()) != null) {
-                Assert.assertNotNull(msg.getId());
-                Assert.assertNotNull(msg.getState());
-                Assert.assertNotNull(msg.getTimestamp());
+				Assert.assertNotNull(msg.getId());
+				Assert.assertNotNull(msg.getState());
+				Assert.assertNotNull(msg.getTimestamp());
 				count++;
 			}
 		} finally {
@@ -49,7 +47,7 @@ public class LogFileItemReaderTest {
 				Assert.fail(e.toString());
 			}
 		}
-		
+
 		return count;
 	}
 }
