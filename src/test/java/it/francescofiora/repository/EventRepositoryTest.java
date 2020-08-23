@@ -1,14 +1,15 @@
 package it.francescofiora.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.francescofiora.model.EventLog;
@@ -18,7 +19,7 @@ import it.francescofiora.model.EventLog;
  * @author francesco
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(value = { 
 		"spring.batch.job.enabled=false",
 		"spring.datasource.url=jdbc:hsqldb:mem:testdb;sql.enforce_strict_size=true"})
@@ -48,23 +49,23 @@ public class EventRepositoryTest {
 		event.setEstart(EVENT_START);
 		repository.save(event);
 		Optional<EventLog> opt = repository.findById(ID_EVENT);
-		Assert.assertTrue(opt.isPresent());
+		assertThat(opt).isPresent();
 		event = opt.get();
-		Assert.assertEquals(EVENT_HOST, event.getHost());
-		Assert.assertEquals(EVENT_TYPE, event.getEtype());
-		Assert.assertEquals(EVENT_START, event.getEstart());
+		assertThat(event.getHost()).isEqualTo(EVENT_HOST);
+		assertThat(event.getEtype()).isEqualTo(EVENT_TYPE);
+		assertThat(event.getEstart()).isEqualTo(EVENT_START);
 		
 		event.setEend(EVENT_END);
 		event.setDuration(EVENT_DURATION);
 		repository.save(event);
 		opt = repository.findById(ID_EVENT);
-		Assert.assertTrue(opt.isPresent());
+		assertThat(opt).isPresent();
 		event = opt.get();
-		Assert.assertEquals(EVENT_HOST, event.getHost());
-		Assert.assertEquals(EVENT_TYPE, event.getEtype());
-		Assert.assertEquals(EVENT_START, event.getEstart());
-		Assert.assertEquals(EVENT_END, event.getEend());
-		Assert.assertEquals(EVENT_DURATION, event.getDuration());
+		assertThat(event.getHost()).isEqualTo(EVENT_HOST);
+		assertThat(event.getEtype()).isEqualTo(EVENT_TYPE);
+		assertThat(event.getEstart()).isEqualTo(EVENT_START);
+		assertThat(event.getEend()).isEqualTo(EVENT_END);
+		assertThat(event.getDuration()).isEqualTo(EVENT_DURATION);
 	}
 	
 }

@@ -1,11 +1,12 @@
 package it.francescofiora.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -18,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import it.francescofiora.service.EventService;
 
@@ -27,7 +28,7 @@ import it.francescofiora.service.EventService;
  * @author francesco
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(
     classes = {SpringBatchConfigTest.BatchTestConfig.class})
 public class SpringBatchConfigTest {
@@ -43,7 +44,7 @@ public class SpringBatchConfigTest {
 		Map<String, JobParameter> map = new HashMap<>();
 		map.put("file", new JobParameter(file));
 		JobExecution jobExecution = jobLauncherTestUtils.launchJob(new JobParameters(map));
-		Assert.assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
+		assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
 	}
 
 	@Configuration

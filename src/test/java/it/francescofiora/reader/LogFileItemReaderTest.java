@@ -1,12 +1,13 @@
 package it.francescofiora.reader;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.test.MetaDataInstanceFactory;
 import org.springframework.batch.test.StepScopeTestUtils;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import it.francescofiora.model.Message;
 
@@ -16,7 +17,7 @@ import it.francescofiora.model.Message;
  * @author francesco
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class LogFileItemReaderTest {
 
 	private LogFileItemReader itemReader = new LogFileItemReader();
@@ -24,7 +25,7 @@ public class LogFileItemReaderTest {
 	@Test
 	public void testReader() throws Exception {
 		int count = StepScopeTestUtils.doInStepScope(MetaDataInstanceFactory.createStepExecution(), () -> callable());
-		Assert.assertEquals(6, count);
+		assertThat(count).isEqualTo(6);
 	}
 
 	private int callable() throws Exception {
@@ -35,16 +36,16 @@ public class LogFileItemReaderTest {
 		int count = 0;
 		try {
 			while ((msg = itemReader.read()) != null) {
-				Assert.assertNotNull(msg.getId());
-				Assert.assertNotNull(msg.getState());
-				Assert.assertNotNull(msg.getTimestamp());
+			  assertThat(msg.getId()).isNotNull();
+			  assertThat(msg.getState()).isNotNull();
+			  assertThat(msg.getTimestamp()).isNotNull();
 				count++;
 			}
 		} finally {
 			try {
 				itemReader.close();
 			} catch (ItemStreamException e) {
-				Assert.fail(e.toString());
+				throw new RuntimeException(e.getMessage());
 			}
 		}
 

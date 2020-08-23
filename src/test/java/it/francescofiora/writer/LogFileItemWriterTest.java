@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import it.francescofiora.model.EventLog;
 import it.francescofiora.model.Message;
@@ -18,7 +18,7 @@ import it.francescofiora.service.EventService;
  * @author francesco
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class LogFileItemWriterTest {
 
 	private static final String ID_EVENT_1 = "ID1"; 

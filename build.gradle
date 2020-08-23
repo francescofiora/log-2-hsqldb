@@ -49,6 +49,10 @@ sourceSets {
   }
 }
 
+test {
+  useJUnitPlatform()
+}
+
 wrapper {
     gradleVersion = "6.3"
 }
