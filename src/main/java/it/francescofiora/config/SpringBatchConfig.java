@@ -21,53 +21,52 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * SpringBatch Config.
- * 
- * @author francesco
  */
 @Configuration
 @EnableBatchProcessing
 public class SpringBatchConfig {
-	private Logger log = LoggerFactory.getLogger(this.getClass());
+  private Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Value("${job.chunk:100}")
-	private Integer chunk;
+  @Value("${job.chunk:100}")
+  private Integer chunk;
 
-	public final JobBuilderFactory jobBuilderFactory;
+  public final JobBuilderFactory jobBuilderFactory;
 
-	public final StepBuilderFactory stepBuilderFactory;
+  public final StepBuilderFactory stepBuilderFactory;
 
-	public final EventService service;
+  public final EventService service;
 
-	public SpringBatchConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
-			EventService service) {
-		this.jobBuilderFactory = jobBuilderFactory;
-		this.stepBuilderFactory = stepBuilderFactory;
-		this.service = service;
-	}
+  public SpringBatchConfig(JobBuilderFactory jobBuilderFactory,
+      StepBuilderFactory stepBuilderFactory, EventService service) {
+    this.jobBuilderFactory = jobBuilderFactory;
+    this.stepBuilderFactory = stepBuilderFactory;
+    this.service = service;
+  }
 
-	@Bean
-	public Job read() {
-		return jobBuilderFactory.get("read").incrementer(new RunIdIncrementer()).start(step1()).build();
-	}
+  @Bean
+  public Job read() {
+    return jobBuilderFactory.get("read").incrementer(new RunIdIncrementer()).start(step1()).build();
+  }
 
-	@Bean
-	public TaskletStep step1() {
-		log.debug("Chunk: " + chunk);
-		return stepBuilderFactory.get("step1").<Message, Message>chunk(chunk).reader(reader(null)).writer(writer()).build();
-	}
+  @Bean
+  public TaskletStep step1() {
+    log.debug("Chunk: " + chunk);
+    return stepBuilderFactory.get("step1").<Message, Message>chunk(chunk).reader(reader(null))
+        .writer(writer()).build();
+  }
 
-	@Bean
-	public ItemWriter<Message> writer() {
-		return new LogFileItemWriter(service);
-	}
+  @Bean
+  public ItemWriter<Message> writer() {
+    return new LogFileItemWriter(service);
+  }
 
-	@Bean
-	@StepScope
-	public FlatFileItemReader<Message> reader(@Value("#{jobParameters['file']}") String file) {
-		log.debug("Load log file: " + file);
-		LogFileItemReader reader = new LogFileItemReader();
-		reader.init(file);
-		return reader;
-	}
+  @Bean
+  @StepScope
+  public FlatFileItemReader<Message> reader(@Value("#{jobParameters['file']}") String file) {
+    log.debug("Load log file: " + file);
+    LogFileItemReader reader = new LogFileItemReader();
+    reader.init(file);
+    return reader;
+  }
 
 }

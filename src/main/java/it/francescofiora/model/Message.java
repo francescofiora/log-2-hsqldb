@@ -2,7 +2,6 @@ package it.francescofiora.model;
 
 /**
  * POJO Message.
- * @author francesco
  */
 public class Message {
 	private String id;

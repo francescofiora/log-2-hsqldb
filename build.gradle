@@ -1,6 +1,6 @@
 plugins {
-	id 'java'
-	id 'eclipse-wtp'
+  id 'java'
+  id 'eclipse-wtp'
   id 'org.springframework.boot' version '2.7.3'
   id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
@@ -20,14 +20,14 @@ def logbackVersion = property('logback.version')
 
 dependencies {
 
-    implementation 'org.springframework.boot:spring-boot-starter-batch'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation "ch.qos.logback:logback-classic:$logbackVersion"
+  implementation 'org.springframework.boot:spring-boot-starter-batch'
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation "ch.qos.logback:logback-classic:$logbackVersion"
 
-    implementation 'com.h2database:h2'
+  implementation 'com.h2database:h2'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.batch:spring-batch-test'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.springframework.batch:spring-batch-test'
 }
 
 sourceSets {
@@ -58,5 +58,5 @@ test {
 }
 
 wrapper {
-    gradleVersion = "7.0"
+  gradleVersion = "7.0"
 }

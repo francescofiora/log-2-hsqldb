@@ -4,18 +4,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
-* Application starter.
-* 
-* @author francesco.fiora
-*/
+ * Application starter.
+ */
 @SpringBootApplication
 public class Application {
 
-	/**
-	 * main method.
-	 * @param args args
-	 */
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}  
+  /**
+   * Main method.
+   *
+   * @param args args
+   */
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 }

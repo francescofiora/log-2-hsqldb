@@ -1,92 +1,94 @@
 package it.francescofiora.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * EventLog Entity.
+ */
 @Entity
 @Table(name = "eventlog")
 public class EventLog implements Serializable {
-	  private static final long serialVersionUID = 1L;
-	  
-	@Id
-	@Column(name = "id")
-    private String id;
+  private static final long serialVersionUID = 1L;
 
-	@Column(name = "estart")
-    private Long estart;
+  @Id
+  @Column(name = "id")
+  private String id;
 
-	@Column(name = "eend")
-    private Long eend;
+  @Column(name = "estart")
+  private Long estart;
 
-	@Column(name = "duration")
-    private Long duration;
+  @Column(name = "eend")
+  private Long eend;
 
-	@Column(name = "etype")
-    private String etype;
+  @Column(name = "duration")
+  private Long duration;
 
-	@Column(name = "host")
-    private String host;
+  @Column(name = "etype")
+  private String etype;
 
-	@Column(name = "alert")
-    private String alert;
+  @Column(name = "host")
+  private String host;
 
-	public String getId() {
-		return id;
-	}
+  @Column(name = "alert")
+  private String alert;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public Long getEstart() {
-		return estart;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public void setEstart(Long estart) {
-		this.estart = estart;
-	}
+  public Long getEstart() {
+    return estart;
+  }
 
-	public Long getEend() {
-		return eend;
-	}
+  public void setEstart(Long estart) {
+    this.estart = estart;
+  }
 
-	public void setEend(Long eend) {
-		this.eend = eend;
-	}
+  public Long getEend() {
+    return eend;
+  }
 
-	public Long getDuration() {
-		return duration;
-	}
+  public void setEend(Long eend) {
+    this.eend = eend;
+  }
 
-	public void setDuration(Long duration) {
-		this.duration = duration;
-	}
+  public Long getDuration() {
+    return duration;
+  }
 
-	public String getEtype() {
-		return etype;
-	}
+  public void setDuration(Long duration) {
+    this.duration = duration;
+  }
 
-	public void setEtype(String etype) {
-		this.etype = etype;
-	}
+  public String getEtype() {
+    return etype;
+  }
 
-	public String getHost() {
-		return host;
-	}
+  public void setEtype(String etype) {
+    this.etype = etype;
+  }
 
-	public void setHost(String host) {
-		this.host = host;
-	}
+  public String getHost() {
+    return host;
+  }
 
-	public String getAlert() {
-		return alert;
-	}
+  public void setHost(String host) {
+    this.host = host;
+  }
 
-	public void setAlert(String alert) {
-		this.alert = alert;
-	}    
+  public String getAlert() {
+    return alert;
+  }
+
+  public void setAlert(String alert) {
+    this.alert = alert;
+  }
 }
