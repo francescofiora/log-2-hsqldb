@@ -1,5 +1,9 @@
 package it.francescofiora.config;
 
+import it.francescofiora.model.Message;
+import it.francescofiora.reader.LogFileItemReader;
+import it.francescofiora.service.EventService;
+import it.francescofiora.writer.LogFileItemWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -14,12 +18,6 @@ import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-
-import it.francescofiora.model.Message;
-import it.francescofiora.reader.LogFileItemReader;
-import it.francescofiora.service.EventService;
-import it.francescofiora.writer.LogFileItemWriter;
 
 /**
  * SpringBatch Config.
@@ -28,7 +26,6 @@ import it.francescofiora.writer.LogFileItemWriter;
  */
 @Configuration
 @EnableBatchProcessing
-@PropertySource("classpath:/batch.properties")
 public class SpringBatchConfig {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 

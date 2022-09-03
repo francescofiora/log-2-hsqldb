@@ -51,16 +51,13 @@ public class SpringBatchConfigTest {
 	@Import({SpringBatchConfig.class})
 	static class BatchTestConfig {
 
-		@Autowired
-		private Job job;
-
 		@Bean
 		public EventService service() {
 			return Mockito.mock(EventService.class);
 		} 
 		
 		@Bean
-		public JobLauncherTestUtils jobLauncherTestUtils() throws NoSuchJobException {
+		public JobLauncherTestUtils jobLauncherTestUtils(Job job) throws NoSuchJobException {
 			JobLauncherTestUtils jobLauncherTestUtils = new JobLauncherTestUtils();
 			jobLauncherTestUtils.setJob(job);
 

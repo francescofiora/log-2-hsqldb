@@ -1,8 +1,8 @@
 plugins {
 	id 'java'
 	id 'eclipse-wtp'
-	id 'org.springframework.boot' version '2.3.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+  id 'org.springframework.boot' version '2.7.3'
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 sourceCompatibility = 1.8
@@ -49,11 +49,14 @@ sourceSets {
   }
 }
 
+springBoot {
+  mainClass.set("it.francescofiora.Application")
+}
+
 test {
   useJUnitPlatform()
 }
 
 wrapper {
-    gradleVersion = "6.3"
+    gradleVersion = "7.0"
 }
-
