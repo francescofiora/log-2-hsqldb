@@ -30,33 +30,20 @@ public class SpringBatchConfig {
   @Value("${job.chunk:100}")
   private Integer chunk;
 
-  public final JobBuilderFactory jobBuilderFactory;
-
-  public final StepBuilderFactory stepBuilderFactory;
-
-  public final EventService service;
-
-  public SpringBatchConfig(JobBuilderFactory jobBuilderFactory,
-      StepBuilderFactory stepBuilderFactory, EventService service) {
-    this.jobBuilderFactory = jobBuilderFactory;
-    this.stepBuilderFactory = stepBuilderFactory;
-    this.service = service;
+  @Bean
+  public Job read(JobBuilderFactory jobBuilderFactory, TaskletStep step1) {
+    return jobBuilderFactory.get("read").incrementer(new RunIdIncrementer()).start(step1).build();
   }
 
   @Bean
-  public Job read() {
-    return jobBuilderFactory.get("read").incrementer(new RunIdIncrementer()).start(step1()).build();
-  }
-
-  @Bean
-  public TaskletStep step1() {
+  public TaskletStep step1(StepBuilderFactory stepBuilderFactory, ItemWriter<Message> writer) {
     log.debug("Chunk: " + chunk);
     return stepBuilderFactory.get("step1").<Message, Message>chunk(chunk).reader(reader(null))
-        .writer(writer()).build();
+        .writer(writer).build();
   }
 
   @Bean
-  public ItemWriter<Message> writer() {
+  public ItemWriter<Message> writer(EventService service) {
     return new LogFileItemWriter(service);
   }
 

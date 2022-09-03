@@ -4,7 +4,6 @@ import it.francescofiora.model.EventLog;
 import it.francescofiora.model.Message;
 import it.francescofiora.service.EventService;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemWriter;
@@ -23,12 +22,12 @@ public class LogFileItemWriter implements ItemWriter<Message> {
     log.debug("received " + items.size() + "messages");
 
     int count = 0;
-    for (Message msg : items) {
+    for (var msg : items) {
       if (msg.isSkip()) {
         continue;
       }
-      Optional<EventLog> opt = service.findById(msg.getId());
-      EventLog event = opt.isPresent() ? opt.get() : createEvent(msg);
+      var opt = service.findById(msg.getId());
+      var event = opt.isPresent() ? opt.get() : createEvent(msg);
       if ("STARTED".equals(msg.getState())) {
         event.setEstart(msg.getTimestamp());
       } else {
@@ -45,7 +44,7 @@ public class LogFileItemWriter implements ItemWriter<Message> {
   }
 
   private EventLog createEvent(final Message msg) {
-    EventLog event = new EventLog();
+    var event = new EventLog();
     event.setId(msg.getId());
     event.setEtype(msg.getType());
     event.setHost(msg.getHost());

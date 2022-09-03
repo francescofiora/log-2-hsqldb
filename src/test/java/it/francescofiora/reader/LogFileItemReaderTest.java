@@ -18,15 +18,15 @@ class LogFileItemReaderTest {
 
   @Test
   void testReader() throws Exception {
-    int count = StepScopeTestUtils.doInStepScope(MetaDataInstanceFactory.createStepExecution(),
+    var count = StepScopeTestUtils.doInStepScope(MetaDataInstanceFactory.createStepExecution(),
         () -> callable());
     assertThat(count).isEqualTo(6);
   }
 
   private int callable() throws Exception {
-    LogFileItemReader itemReader = new LogFileItemReader();
+    var itemReader = new LogFileItemReader();
 
-    String file =
+    var file =
         getClass().getClassLoader().getResource("it/francescofiora/reader/events.log").getFile();
     itemReader.init(file);
     itemReader.open(MetaDataInstanceFactory.createStepExecution().getExecutionContext());

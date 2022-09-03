@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 import it.francescofiora.service.EventService;
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,11 +32,10 @@ class SpringBatchConfigTest {
 
   @Test
   void testHelloWorldJob() throws Exception {
-    String file =
+    var file =
         getClass().getClassLoader().getResource("it/francescofiora/reader/events.log").getFile();
 
-    Map<String, JobParameter> map = new HashMap<>();
-    map.put("file", new JobParameter(file));
+    var map = Map.of("file", new JobParameter(file));
     JobExecution jobExecution = jobLauncherTestUtils.launchJob(new JobParameters(map));
     assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
   }
@@ -53,7 +51,7 @@ class SpringBatchConfigTest {
 
     @Bean
     public JobLauncherTestUtils jobLauncherTestUtils(Job job) throws NoSuchJobException {
-      JobLauncherTestUtils jobLauncherTestUtils = new JobLauncherTestUtils();
+      var jobLauncherTestUtils = new JobLauncherTestUtils();
       jobLauncherTestUtils.setJob(job);
 
       return jobLauncherTestUtils;

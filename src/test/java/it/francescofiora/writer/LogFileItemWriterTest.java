@@ -10,7 +10,6 @@ import static org.mockito.Mockito.when;
 import it.francescofiora.model.EventLog;
 import it.francescofiora.model.Message;
 import it.francescofiora.service.EventService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -28,29 +27,27 @@ class LogFileItemWriterTest {
 
   @Test
   void testWriter() throws Exception {
-    EventService service = mock(EventService.class);
+    var service = mock(EventService.class);
     when(service.findById(eq(ID_EVENT_1))).thenReturn(Optional.empty());
 
-    EventLog event = new EventLog();
+    var event = new EventLog();
     event.setId(ID_EVENT_2);
     event.setEstart(10L);
     when(service.findById(eq(ID_EVENT_2))).thenReturn(Optional.of(event));
 
-    LogFileItemWriter itemWriter = new LogFileItemWriter(service);
+    var itemWriter = new LogFileItemWriter(service);
 
-    List<Message> items = new ArrayList<>();
-    Message msg = new Message();
-    msg.setId(ID_EVENT_1);
-    msg.setState("STARTED");
-    msg.setTimestamp(10);
-    items.add(msg);
+    var msgEvent1 = new Message();
+    msgEvent1.setId(ID_EVENT_1);
+    msgEvent1.setState("STARTED");
+    msgEvent1.setTimestamp(10);
 
-    msg = new Message();
-    msg.setId(ID_EVENT_2);
-    msg.setState("FINISHED");
-    msg.setTimestamp(15);
-    items.add(msg);
-    itemWriter.write(items);
+    var msgEvent2 = new Message();
+    msgEvent2.setId(ID_EVENT_2);
+    msgEvent2.setState("FINISHED");
+    msgEvent2.setTimestamp(15);
+
+    itemWriter.write(List.of(msgEvent1, msgEvent2));
 
     verify(service, times(1)).findById(eq(ID_EVENT_1));
     verify(service, times(1)).findById(eq(ID_EVENT_2));

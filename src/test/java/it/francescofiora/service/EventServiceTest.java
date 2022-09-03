@@ -26,15 +26,15 @@ class EventServiceTest {
 
   @Test
   void test() {
-    EventRepository repository = mock(EventRepository.class);
-    EventService service = new EventServiceImpl(repository);
+    var repository = mock(EventRepository.class);
+    var service = new EventServiceImpl(repository);
 
-    EventLog event = new EventLog();
+    var event = new EventLog();
     event.setId(ID_EVENT);
 
     when(repository.findById(eq(ID_EVENT))).thenReturn(Optional.of(event));
 
-    Optional<EventLog> opt = service.findById(ID_EVENT);
+    var opt = service.findById(ID_EVENT);
     assertThat(opt).isPresent();
     event = opt.get();
     assertThat(event.getId()).isEqualTo(ID_EVENT);

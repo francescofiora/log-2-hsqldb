@@ -3,7 +3,6 @@ package it.francescofiora.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import it.francescofiora.model.EventLog;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +33,13 @@ class EventRepositoryTest {
    */
   @Test
   void testCrud() {
-    EventLog event = new EventLog();
+    var event = new EventLog();
     event.setId(ID_EVENT);
     event.setEtype(EVENT_TYPE);
     event.setHost(EVENT_HOST);
     event.setEstart(EVENT_START);
     repository.save(event);
-    Optional<EventLog> opt = repository.findById(ID_EVENT);
+    var opt = repository.findById(ID_EVENT);
     assertThat(opt).isPresent();
     event = opt.get();
     assertThat(event.getHost()).isEqualTo(EVENT_HOST);
