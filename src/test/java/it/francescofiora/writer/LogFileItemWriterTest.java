@@ -35,8 +35,6 @@ class LogFileItemWriterTest {
     event.setEstart(10L);
     when(service.findById(eq(ID_EVENT_2))).thenReturn(Optional.of(event));
 
-    var itemWriter = new LogFileItemWriter(service);
-
     var msgEvent1 = new Message();
     msgEvent1.setId(ID_EVENT_1);
     msgEvent1.setState("STARTED");
@@ -47,6 +45,7 @@ class LogFileItemWriterTest {
     msgEvent2.setState("FINISHED");
     msgEvent2.setTimestamp(15);
 
+    var itemWriter = new LogFileItemWriter(service);
     itemWriter.write(List.of(msgEvent1, msgEvent2));
 
     verify(service, times(1)).findById(eq(ID_EVENT_1));

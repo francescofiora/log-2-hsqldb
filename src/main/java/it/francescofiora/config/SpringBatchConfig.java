@@ -35,6 +35,13 @@ public class SpringBatchConfig {
     return jobBuilderFactory.get("read").incrementer(new RunIdIncrementer()).start(step1).build();
   }
 
+  /**
+   * Create step1 bean.
+   *
+   * @param stepBuilderFactory StepBuilderFactory
+   * @param writer ItemWriter
+   * @return TaskletStep
+   */
   @Bean
   public TaskletStep step1(StepBuilderFactory stepBuilderFactory, ItemWriter<Message> writer) {
     log.debug("Chunk: " + chunk);
@@ -47,6 +54,12 @@ public class SpringBatchConfig {
     return new LogFileItemWriter(service);
   }
 
+  /**
+   * Create FlatFileItemReader bean.
+   *
+   * @param file the path file
+   * @return FlatFileItemReader
+   */
   @Bean
   @StepScope
   public FlatFileItemReader<Message> reader(@Value("#{jobParameters['file']}") String file) {

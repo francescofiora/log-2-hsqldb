@@ -3,6 +3,8 @@ plugins {
   id 'eclipse-wtp'
   id 'org.springframework.boot' version '2.7.3'
   id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'checkstyle'
+  id 'jacoco'
 }
 
 sourceCompatibility = 1.11
@@ -35,6 +37,10 @@ dependencies {
   testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"
 }
 
+springBoot {
+  mainClass.set("it.francescofiora.Application")
+}
+
 sourceSets {
   main {
     java {
@@ -54,12 +60,33 @@ sourceSets {
   }
 }
 
-springBoot {
-  mainClass.set("it.francescofiora.Application")
+checkstyle {
+  toolVersion property('checkstyle.version')
+  configFile  file("config/checkstyle/checkstyle.xml")
+}
+tasks.withType(Checkstyle) {
+  reports {
+    xml.enabled = false
+    html.enabled = true
+  }
+}
+checkstyleMain {
+  source ='src/main/java'
 }
 
 test {
   useJUnitPlatform()
+  finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+  dependsOn test
+  reports {
+    xml.enabled true
+    csv.enabled false
+    html.destination file("${buildDir}/reports/jacoco/test")
+    xml.destination  file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+  }
 }
 
 wrapper {
