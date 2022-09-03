@@ -22,7 +22,7 @@ import it.francescofiora.model.EventLog;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(value = { 
 		"spring.batch.job.enabled=false",
-		"spring.datasource.url=jdbc:hsqldb:mem:testdb;sql.enforce_strict_size=true"})
+		"spring.datasource.url=jdbc:h2:mem:testdb"})
 @Transactional
 public class EventRepositoryTest {
 

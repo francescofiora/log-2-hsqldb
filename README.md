@@ -1,5 +1,5 @@
 # log-2-hsqldb
-Using Spring Boot Batch: Log file to HsqlDb
+Using Spring Boot Batch: Log to H2 file
 
 ## Summary
 A custom-build server logs different events to a file. Every event has 2 entries in a log - one entry when the event was started and another when the event was finished. The entries in a log file have no specific order (it can occur that a specific event is logged before the event starts)
@@ -37,7 +37,7 @@ The application create a new table if necessary and enter the following values:
 - [Spring Boot 2.3](https://spring.io/projects/spring-boot)
 - [Spring Batch](https://spring.io/projects/spring-batch)
 - [Spring Data JPA](https://projects.spring.io/spring-data-jpa)
-- [HsqlDb](http://hsqldb.org/)
+- [H2](http://www.h2database.com/)
 - [LogBack 1.2](https://logback.qos.ch/)
 - [Mockito](https://site.mockito.org/)
 
