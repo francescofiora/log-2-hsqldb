@@ -3,8 +3,7 @@ package it.francescofiora.reader;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.francescofiora.model.Message;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.core.io.FileSystemResource;
@@ -12,9 +11,8 @@ import org.springframework.core.io.FileSystemResource;
 /**
  * LogFile ItemReader.
  */
+@Slf4j
 public class LogFileItemReader extends FlatFileItemReader<Message> {
-
-  private Logger log = LoggerFactory.getLogger(this.getClass());
 
   public void init(final String file) {
     setResource(new FileSystemResource(file));

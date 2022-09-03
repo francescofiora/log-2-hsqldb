@@ -5,22 +5,18 @@ import it.francescofiora.model.Message;
 import it.francescofiora.service.EventService;
 import java.util.List;
 import java.util.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemWriter;
 
 /**
  * LogFileItem Writer.
  */
+@Slf4j
+@RequiredArgsConstructor
 public class LogFileItemWriter implements ItemWriter<Message> {
 
-  private Logger log = LoggerFactory.getLogger(this.getClass());
-
-  private EventService service;
-
-  public LogFileItemWriter(final EventService service) {
-    this.service = service;
-  }
+  private final EventService service;
 
   @Override
   public void write(List<? extends Message> items) throws Exception {

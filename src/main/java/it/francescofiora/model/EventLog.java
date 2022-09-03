@@ -5,12 +5,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * EventLog Entity.
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "eventlog")
+@ToString(includeFieldNames = true)
 public class EventLog implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -35,60 +41,4 @@ public class EventLog implements Serializable {
 
   @Column(name = "alert")
   private String alert;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public Long getEstart() {
-    return estart;
-  }
-
-  public void setEstart(Long estart) {
-    this.estart = estart;
-  }
-
-  public Long getEend() {
-    return eend;
-  }
-
-  public void setEend(Long eend) {
-    this.eend = eend;
-  }
-
-  public Long getDuration() {
-    return duration;
-  }
-
-  public void setDuration(Long duration) {
-    this.duration = duration;
-  }
-
-  public String getEtype() {
-    return etype;
-  }
-
-  public void setEtype(String etype) {
-    this.etype = etype;
-  }
-
-  public String getHost() {
-    return host;
-  }
-
-  public void setHost(String host) {
-    this.host = host;
-  }
-
-  public String getAlert() {
-    return alert;
-  }
-
-  public void setAlert(String alert) {
-    this.alert = alert;
-  }
 }
