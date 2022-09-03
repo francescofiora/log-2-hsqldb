@@ -31,9 +31,21 @@ The application create a new table if necessary and enter the following values:
 * Type and Host if applicable
 * "alert" true is applicable
 
+## How to build
+./gradlew clean build
+
+### Reports
+    build/reports/checkstyle/main.html
+    build/reports/checkstyle/test.html
+    build/reports/tests/test/index.html
+    build/reports/jacoco/test/html/index.html
+
+## How to execute
+java -jar build/libs/log-2-hsqldb-1.0-SNAPSHOT.jar file=<path/file_name.log>
+
 ## Technologies used
 - [Gradle 7.0](https://gradle.org/)
-- [Java 8](http://www.oracle.com/technetwork/java/javaee/overview/index.html)
+- [Java 11](https://openjdk.java.net/projects/jdk/11/)
 - [Spring Boot 2.7](https://spring.io/projects/spring-boot)
 - [Spring Batch](https://spring.io/projects/spring-batch)
 - [Spring Data JPA](https://projects.spring.io/spring-data-jpa)
@@ -42,10 +54,5 @@ The application create a new table if necessary and enter the following values:
 - [LogBack 1.2](https://logback.qos.ch/)
 - [JUnit 5](https://junit.org/junit5/)
 - [Mockito](https://site.mockito.org/)
-
-## How to build
-./gradlew clean build
-
-## How to execute
-java -jar build/libs/log-2-hsqldb-1.0-SNAPSHOT.jar file=<path/file_name.log>
-
+- [CheckStyle 8.44](https://checkstyle.sourceforge.io/)
+- [Jacoco 0.8](https://www.jacoco.org/)
