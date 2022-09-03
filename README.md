@@ -24,7 +24,7 @@ Example
 ## What the project does
 Take the input file path as input argument.
 Flag any long events that take longer than 4ms with a column in the database called "alert".
-Write the found event details to file-based HSQLDB in the working folder.
+Write the found event details to file-based H2 in the working folder.
 The application create a new table if necessary and enter the following values:
 * Event id
 * Event duration
@@ -32,13 +32,15 @@ The application create a new table if necessary and enter the following values:
 * "alert" true is applicable
 
 ## Technologies used
-- [Gradle 6.3](https://gradle.org/)
+- [Gradle 7.0](https://gradle.org/)
 - [Java 8](http://www.oracle.com/technetwork/java/javaee/overview/index.html)
-- [Spring Boot 2.3](https://spring.io/projects/spring-boot)
+- [Spring Boot 2.7](https://spring.io/projects/spring-boot)
 - [Spring Batch](https://spring.io/projects/spring-batch)
 - [Spring Data JPA](https://projects.spring.io/spring-data-jpa)
 - [H2](http://www.h2database.com/)
+- [Lombok 1.18](https://projectlombok.org/)
 - [LogBack 1.2](https://logback.qos.ch/)
+- [JUnit 5](https://junit.org/junit5/)
 - [Mockito](https://site.mockito.org/)
 
 ## How to build

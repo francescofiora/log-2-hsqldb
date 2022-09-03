@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest(
     value = {"spring.batch.job.enabled=false", "spring.datasource.url=jdbc:h2:mem:testdb"})
 @Transactional
-public class EventRepositoryTest {
+class EventRepositoryTest {
 
   @Autowired
   private EventRepository repository;
@@ -35,7 +35,7 @@ public class EventRepositoryTest {
    */
   @Test
   @Rollback
-  public void testCrud() {
+  void testCrud() {
     EventLog event = new EventLog();
     event.setId(ID_EVENT);
     event.setEtype(EVENT_TYPE);
@@ -61,5 +61,4 @@ public class EventRepositoryTest {
     assertThat(event.getEend()).isEqualTo(EVENT_END);
     assertThat(event.getDuration()).isEqualTo(EVENT_DURATION);
   }
-
 }

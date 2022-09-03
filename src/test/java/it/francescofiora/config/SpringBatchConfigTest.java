@@ -25,13 +25,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {SpringBatchConfigTest.BatchTestConfig.class})
-public class SpringBatchConfigTest {
+class SpringBatchConfigTest {
 
   @Autowired
   private JobLauncherTestUtils jobLauncherTestUtils;
 
   @Test
-  public void testHelloWorldJob() throws Exception {
+  void testHelloWorldJob() throws Exception {
     String file =
         getClass().getClassLoader().getResource("it/francescofiora/reader/events.log").getFile();
 

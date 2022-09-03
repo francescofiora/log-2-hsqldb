@@ -18,7 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * Test EventService.
  */
 @ExtendWith(SpringExtension.class)
-public class EventServiceTest {
+class EventServiceTest {
 
   @Autowired
   private EventService service;
@@ -29,7 +29,7 @@ public class EventServiceTest {
   private static final String ID_EVENT = "test";
 
   @Test
-  public void test() {
+  void test() {
     EventLog event = new EventLog();
     event.setId(ID_EVENT);
 

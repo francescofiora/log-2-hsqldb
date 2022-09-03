@@ -13,12 +13,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * Test LogFileItemReader.
  */
 @ExtendWith(SpringExtension.class)
-public class LogFileItemReaderTest {
+class LogFileItemReaderTest {
 
   private LogFileItemReader itemReader = new LogFileItemReader();
 
   @Test
-  public void testReader() throws Exception {
+  void testReader() throws Exception {
     int count = StepScopeTestUtils.doInStepScope(MetaDataInstanceFactory.createStepExecution(),
         () -> callable());
     assertThat(count).isEqualTo(6);

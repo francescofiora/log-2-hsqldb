@@ -15,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * Test LogFileItemWriter.
  */
 @ExtendWith(SpringExtension.class)
-public class LogFileItemWriterTest {
+class LogFileItemWriterTest {
 
   private static final String ID_EVENT_1 = "ID1";
   private static final String ID_EVENT_2 = "ID2";
@@ -23,7 +23,7 @@ public class LogFileItemWriterTest {
   private LogFileItemWriter itemWriter;
 
   @Test
-  public void testWriter() throws Exception {
+  void testWriter() throws Exception {
     EventService service = Mockito.mock(EventService.class);
     Mockito.when(service.findById(Mockito.eq(ID_EVENT_1))).thenReturn(Optional.empty());
 
@@ -52,5 +52,4 @@ public class LogFileItemWriterTest {
     Mockito.verify(service, Mockito.times(1)).findById(Mockito.eq(ID_EVENT_2));
     Mockito.verify(service, Mockito.times(2)).save(Mockito.any(EventLog.class));
   }
-
 }
