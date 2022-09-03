@@ -1,17 +1,19 @@
 package it.francescofiora.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import it.francescofiora.model.EventLog;
 import it.francescofiora.repository.EventRepository;
 import it.francescofiora.service.impl.EventServiceImpl;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
@@ -20,20 +22,17 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 class EventServiceTest {
 
-  @Autowired
-  private EventService service;
-
-  @MockBean
-  private EventRepository repository;
-
   private static final String ID_EVENT = "test";
 
   @Test
   void test() {
+    EventRepository repository = mock(EventRepository.class);
+    EventService service = new EventServiceImpl(repository);
+
     EventLog event = new EventLog();
     event.setId(ID_EVENT);
 
-    Mockito.when(repository.findById(Mockito.eq(ID_EVENT))).thenReturn(Optional.of(event));
+    when(repository.findById(eq(ID_EVENT))).thenReturn(Optional.of(event));
 
     Optional<EventLog> opt = service.findById(ID_EVENT);
     assertThat(opt).isPresent();
@@ -41,15 +40,6 @@ class EventServiceTest {
     assertThat(event.getId()).isEqualTo(ID_EVENT);
 
     service.save(event);
-    Mockito.verify(repository, Mockito.times(1)).save(Mockito.any(EventLog.class));
-  }
-
-  @TestConfiguration
-  static class TestContextConfiguration {
-
-    @Bean
-    public EventService service(EventRepository repository) {
-      return new EventServiceImpl(repository);
-    }
+    verify(repository, times(1)).save(any(EventLog.class));
   }
 }

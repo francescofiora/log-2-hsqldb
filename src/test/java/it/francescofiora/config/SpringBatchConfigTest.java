@@ -1,12 +1,13 @@
 package it.francescofiora.config;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import it.francescofiora.service.EventService;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameter;
@@ -47,7 +48,7 @@ class SpringBatchConfigTest {
 
     @Bean
     public EventService service() {
-      return Mockito.mock(EventService.class);
+      return mock(EventService.class);
     }
 
     @Bean

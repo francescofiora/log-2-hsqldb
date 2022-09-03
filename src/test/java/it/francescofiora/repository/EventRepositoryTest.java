@@ -1,23 +1,22 @@
 package it.francescofiora.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import it.francescofiora.model.EventLog;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Test EventRepository.
  */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(
-    value = {"spring.batch.job.enabled=false", "spring.datasource.url=jdbc:h2:mem:testdb"})
-@Transactional
+@DataJpaTest
+@TestPropertySource(locations = { "classpath:application_test.properties" })
 class EventRepositoryTest {
 
   @Autowired
@@ -34,7 +33,6 @@ class EventRepositoryTest {
    * test Create/Read/Update/Delete.
    */
   @Test
-  @Rollback
   void testCrud() {
     EventLog event = new EventLog();
     event.setId(ID_EVENT);

@@ -1,6 +1,7 @@
 package it.francescofiora.reader;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import it.francescofiora.model.Message;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,8 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 class LogFileItemReaderTest {
 
-  private LogFileItemReader itemReader = new LogFileItemReader();
-
   @Test
   void testReader() throws Exception {
     int count = StepScopeTestUtils.doInStepScope(MetaDataInstanceFactory.createStepExecution(),
@@ -25,6 +24,8 @@ class LogFileItemReaderTest {
   }
 
   private int callable() throws Exception {
+    LogFileItemReader itemReader = new LogFileItemReader();
+
     String file =
         getClass().getClassLoader().getResource("it/francescofiora/reader/events.log").getFile();
     itemReader.init(file);

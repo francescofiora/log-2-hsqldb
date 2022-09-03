@@ -1,5 +1,12 @@
 package it.francescofiora.writer;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import it.francescofiora.model.EventLog;
 import it.francescofiora.model.Message;
 import it.francescofiora.service.EventService;
@@ -8,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
@@ -20,19 +26,17 @@ class LogFileItemWriterTest {
   private static final String ID_EVENT_1 = "ID1";
   private static final String ID_EVENT_2 = "ID2";
 
-  private LogFileItemWriter itemWriter;
-
   @Test
   void testWriter() throws Exception {
-    EventService service = Mockito.mock(EventService.class);
-    Mockito.when(service.findById(Mockito.eq(ID_EVENT_1))).thenReturn(Optional.empty());
+    EventService service = mock(EventService.class);
+    when(service.findById(eq(ID_EVENT_1))).thenReturn(Optional.empty());
 
     EventLog event = new EventLog();
     event.setId(ID_EVENT_2);
     event.setEstart(10L);
-    Mockito.when(service.findById(Mockito.eq(ID_EVENT_2))).thenReturn(Optional.of(event));
+    when(service.findById(eq(ID_EVENT_2))).thenReturn(Optional.of(event));
 
-    itemWriter = new LogFileItemWriter(service);
+    LogFileItemWriter itemWriter = new LogFileItemWriter(service);
 
     List<Message> items = new ArrayList<>();
     Message msg = new Message();
@@ -48,8 +52,8 @@ class LogFileItemWriterTest {
     items.add(msg);
     itemWriter.write(items);
 
-    Mockito.verify(service, Mockito.times(1)).findById(Mockito.eq(ID_EVENT_1));
-    Mockito.verify(service, Mockito.times(1)).findById(Mockito.eq(ID_EVENT_2));
-    Mockito.verify(service, Mockito.times(2)).save(Mockito.any(EventLog.class));
+    verify(service, times(1)).findById(eq(ID_EVENT_1));
+    verify(service, times(1)).findById(eq(ID_EVENT_2));
+    verify(service, times(2)).save(any(EventLog.class));
   }
 }
