@@ -4,16 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import it.francescofiora.model.Message;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.batch.item.ItemStreamException;
 import org.springframework.batch.test.MetaDataInstanceFactory;
 import org.springframework.batch.test.StepScopeTestUtils;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * Test LogFileItemReader.
  */
-@ExtendWith(SpringExtension.class)
 class LogFileItemReaderTest {
 
   @Test

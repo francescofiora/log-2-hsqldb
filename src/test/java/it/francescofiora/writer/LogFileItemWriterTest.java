@@ -13,13 +13,10 @@ import it.francescofiora.service.EventService;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * Test LogFileItemWriter.
  */
-@ExtendWith(SpringExtension.class)
 class LogFileItemWriterTest {
 
   private static final String ID_EVENT_1 = "ID1";

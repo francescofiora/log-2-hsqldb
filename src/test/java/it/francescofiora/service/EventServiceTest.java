@@ -13,13 +13,10 @@ import it.francescofiora.repository.EventRepository;
 import it.francescofiora.service.impl.EventServiceImpl;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * Test EventService.
  */
-@ExtendWith(SpringExtension.class)
 class EventServiceTest {
 
   private static final String ID_EVENT = "test";
