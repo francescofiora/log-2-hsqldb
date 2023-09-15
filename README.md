@@ -44,8 +44,8 @@ The application create a new table if necessary and enter the following values:
 java -jar build/libs/log-2-hsqldb-1.0-SNAPSHOT.jar file=<path/file_name.log>
 
 ## Technologies used
-- [Gradle 7.0](https://gradle.org/)
-- [Java 11](https://openjdk.java.net/projects/jdk/11/)
+- [Gradle 7.4](https://gradle.org/)
+- [Java 17](https://openjdk.java.net/projects/jdk/17/)
 - [Spring Boot 2.7](https://spring.io/projects/spring-boot)
 - [Spring Batch](https://spring.io/projects/spring-batch)
 - [Spring Data JPA](https://projects.spring.io/spring-data-jpa)
