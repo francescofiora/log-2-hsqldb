@@ -3,9 +3,9 @@ package it.francescofiora.writer;
 import it.francescofiora.model.EventLog;
 import it.francescofiora.model.Message;
 import it.francescofiora.service.EventService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 
 /**
@@ -18,8 +18,8 @@ public class LogFileItemWriter implements ItemWriter<Message> {
   private final EventService service;
 
   @Override
-  public void write(List<? extends Message> items) throws Exception {
-    log.debug("received " + items.size() + "messages");
+  public void write(Chunk<? extends Message> items) throws Exception {
+    log.debug("received {} messages", items.size());
 
     int count = 0;
     for (var msg : items) {
@@ -40,7 +40,7 @@ public class LogFileItemWriter implements ItemWriter<Message> {
       }
       service.save(event);
     }
-    log.debug("saved " + count + " events from " + items.size() + "messages");
+    log.debug("saved {} events from {} messages", count, items.size());
   }
 
   private EventLog createEvent(final Message msg) {

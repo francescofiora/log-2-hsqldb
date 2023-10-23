@@ -24,8 +24,7 @@ public class LogFileItemReader extends FlatFileItemReader<Message> {
     try {
       return mapper.readValue(line, Message.class);
     } catch (JsonParseException e) {
-      log.error(
-          "Parsing error at line: " + lineNumber + " input=[" + line + "]: " + e.getMessage());
+      log.error("Parsing error at line: {} {} input=[{}]: ", lineNumber, line, e.getMessage());
       var message = new Message();
       message.setSkip(true);
       return message;

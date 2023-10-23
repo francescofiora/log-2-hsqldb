@@ -10,9 +10,9 @@ import static org.mockito.Mockito.when;
 import it.francescofiora.model.EventLog;
 import it.francescofiora.model.Message;
 import it.francescofiora.service.EventService;
-import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
+import org.springframework.batch.item.Chunk;
 
 /**
  * Test LogFileItemWriter.
@@ -43,7 +43,7 @@ class LogFileItemWriterTest {
     msgEvent2.setTimestamp(15);
 
     var itemWriter = new LogFileItemWriter(service);
-    itemWriter.write(List.of(msgEvent1, msgEvent2));
+    itemWriter.write(Chunk.of(msgEvent1, msgEvent2));
 
     verify(service, times(1)).findById(eq(ID_EVENT_1));
     verify(service, times(1)).findById(eq(ID_EVENT_2));

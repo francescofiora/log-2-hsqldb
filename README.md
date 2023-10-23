@@ -41,18 +41,18 @@ The application create a new table if necessary and enter the following values:
     build/reports/jacoco/test/html/index.html
 
 ## How to execute
-java -jar build/libs/log-2-hsqldb-1.0-SNAPSHOT.jar file=<path/file_name.log>
+java -jar build/libs/log-2-hsqldb-1.0-SNAPSHOT.jar --file=<path/file_name.log>
 
 ## Technologies used
-- [Gradle 7.4](https://gradle.org/)
-- [Java 17](https://openjdk.java.net/projects/jdk/17/)
-- [Spring Boot 2.7](https://spring.io/projects/spring-boot)
+- [Gradle 7.4](https://gradle.org)
+- [Java 17](https://openjdk.java.net/projects/jdk/17)
+- [Spring Boot 3.1](https://spring.io/projects/spring-boot)
 - [Spring Batch](https://spring.io/projects/spring-batch)
 - [Spring Data JPA](https://projects.spring.io/spring-data-jpa)
-- [H2](http://www.h2database.com/)
-- [Lombok 1.18](https://projectlombok.org/)
-- [LogBack 1.2](https://logback.qos.ch/)
-- [JUnit 5](https://junit.org/junit5/)
-- [Mockito](https://site.mockito.org/)
-- [CheckStyle 8.44](https://checkstyle.sourceforge.io/)
-- [Jacoco 0.8](https://www.jacoco.org/)
+- [H2](http://www.h2database.com)
+- [Lombok 1.18](https://projectlombok.org)
+- [LogBack 1.4](https://logback.qos.ch)
+- [JUnit 5](https://junit.org/junit5)
+- [Mockito](https://site.mockito.org)
+- [CheckStyle 8.44](https://checkstyle.sourceforge.io)
+- [Jacoco 0.8](https://www.jacoco.org)
