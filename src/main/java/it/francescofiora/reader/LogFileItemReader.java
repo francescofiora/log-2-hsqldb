@@ -13,7 +13,7 @@ import org.springframework.core.io.FileSystemResource;
 @Slf4j
 public class LogFileItemReader extends FlatFileItemReader<Message> {
 
-  private ObjectMapper mapper = new ObjectMapper();
+  private final ObjectMapper mapper = new ObjectMapper();
 
   public void init(final String file) {
     setResource(new FileSystemResource(file));
