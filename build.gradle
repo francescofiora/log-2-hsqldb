@@ -1,7 +1,7 @@
 plugins {
   id 'java'
-  id 'org.springframework.boot' version '3.2.3'
-  id 'io.spring.dependency-management' version '1.1.4'
+  id 'org.springframework.boot' version '3.2.5'
+  id 'io.spring.dependency-management' version '1.1.5'
   id 'checkstyle'
   id 'jacoco'
 }
@@ -19,14 +19,14 @@ version '1.0-SNAPSHOT'
 
 def logback_version = property('logback.version')
 def lombok_version = property('lombok.version')
+def jackson_databind_version = property('jacksondatabind.version')
 
 dependencies {
 
   implementation 'org.springframework.boot:spring-boot-starter-batch'
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-  implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.3'
-
+  implementation "com.fasterxml.jackson.core:jackson-databind:${jackson_databind_version}"
   implementation "ch.qos.logback:logback-classic:$logback_version"
   implementation 'com.h2database:h2'
 
