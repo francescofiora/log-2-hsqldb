@@ -46,7 +46,7 @@ java -jar build/libs/log-2-hsqldb-1.0-SNAPSHOT.jar --file=<path/file_name.log>
 ## Technologies used
 - [Gradle 7.5](https://gradle.org)
 - [Java 17](https://openjdk.java.net/projects/jdk/17)
-- [Spring Boot 3.2](https://spring.io/projects/spring-boot)
+- [Spring Boot 3.3](https://spring.io/projects/spring-boot)
 - [Spring Batch](https://spring.io/projects/spring-batch)
 - [Spring Data JPA](https://projects.spring.io/spring-data-jpa)
 - [H2](http://www.h2database.com)

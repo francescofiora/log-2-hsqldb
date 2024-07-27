@@ -15,8 +15,8 @@ class LogFileItemReaderTest {
 
   @Test
   void testReader() throws Exception {
-    var count = StepScopeTestUtils.doInStepScope(MetaDataInstanceFactory.createStepExecution(),
-        () -> callable());
+    var count = StepScopeTestUtils
+        .doInStepScope(MetaDataInstanceFactory.createStepExecution(), this::callable);
     assertThat(count).isEqualTo(6);
   }
 
