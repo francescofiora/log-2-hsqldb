@@ -4,12 +4,13 @@ Using Spring Boot Batch: Log to H2 file
 ## Summary
 A custom-build server logs different events to a file. Every event has 2 entries in a log - one entry when the event was started and another when the event was finished. The entries in a log file have no specific order (it can occur that a specific event is logged before the event starts)
 Every line in the file is a JSON object containing event data:
-* id - the unique event identifier
-* state - whether the event was started or finished (can have values "STARTED" or "FINISHED"
-* timestamp - the timestamp of the event in milliseconds
-Application Server logs also have the additional attributes:
-* type - type of log
-* host - hostname
+* **id**: the unique event identifier
+* **state**: whether the event was started or finished (can have values "STARTED" or "FINISHED")
+* **timestamp**: the timestamp of the event in millisecond
+
+Application Server logs also have additional attributes:
+* **type**: type of log
+* **host**: hostname
 
 Example
 
@@ -25,7 +26,7 @@ Example
 Take the input file path as input argument.
 Flag any long events that take longer than 4ms with a column in the database called "alert".
 Write the found event details to file-based H2 in the working folder.
-The application create a new table if necessary and enter the following values:
+The application creates a new table if necessary and enter the following values:
 * Event id
 * Event duration
 * Type and Host if applicable
@@ -45,7 +46,7 @@ java -jar build/libs/log-2-hsqldb-1.0-SNAPSHOT.jar --file=<path/file_name.log>
 
 ## Technologies used
 - [Gradle 8.5](https://gradle.org)
-- [Java 17](https://openjdk.java.net/projects/jdk/17)
+- [Java 21](https://openjdk.java.net/projects/jdk/21)
 - [Spring Boot 3.5](https://spring.io/projects/spring-boot)
 - [Spring Batch](https://spring.io/projects/spring-batch)
 - [Spring Data JPA](https://projects.spring.io/spring-data-jpa)
